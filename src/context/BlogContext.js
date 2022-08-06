@@ -9,16 +9,17 @@ const blogReducer =(state,action)=> {
         case 'delete_BlogPost':
          return state.filter (blogPost=>blogPost.id !==action.payload)
         case'add_BlogPost':
-        return[ ...state,{ id:Math.floor(Math.random()*999) ,title:action.payload.title,content:action.payload.content}];
+        return[ ...state,{ id:Math.floor(Math.random()*999) ,title:action.payload.title,content:action.payload.content,selectedImage:action.payload.selectedImage}];
         default:
-            return state;
+            return ;
 
     }
 
 }
 const addBlogPosts=dispatch=> {
-    return (title,content,callback)=> {
-        dispatch({type : 'add_BlogPost' ,payload:{title,content}});
+    return (title,content,selectedImage,callback,)=> {
+        // console.log("frji",title,content,callback,selectedImage)
+        dispatch({type : 'add_BlogPost' ,payload:{title,content,selectedImage}});
         if (callback){
             callback()
         }
@@ -44,4 +45,4 @@ const editBlogPosts=dispatch=> {
    
 }
 
-export const {Context,Provider}=createDataContext(blogReducer,{addBlogPosts,deleteBlogPosts,editBlogPosts},[{title:'Text Title',content:'Text Content',id:1}]);
+export const {Context,Provider}=createDataContext(blogReducer,{addBlogPosts,deleteBlogPosts,editBlogPosts},[{title:'Text Title',content:'Text Content',id:1,selectedImage:"selectedImage"}]);
